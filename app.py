@@ -99,7 +99,9 @@ def methods_page(request: Request):
 # ...
 # ************** END **********************************
 
+# start server
 if __name__ == "__main__":
+    # dev
     uvicorn.run('app:app',
         host="0.0.0.0", 
         port=8000,
@@ -109,3 +111,9 @@ if __name__ == "__main__":
         use_colors=True,
         workers=3
     )
+    # prod
+    #uvicorn.run('app:app',
+    #    host="0.0.0.0", 
+    #    port=80,
+    #    http="h11"
+    #)
