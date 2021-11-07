@@ -35,8 +35,6 @@ from fastapi import Request
 #from fastapi import WebSocket
 from starlette.templating import Jinja2Templates
 from starlette.responses import Response
-from mod import API
-from mod.utils import Utilities
 # ************** External module end *****************
 
 # ************** Logging beginning *******************
@@ -64,10 +62,10 @@ logger.info("Start server")
 templates = Jinja2Templates(directory["folder"])
 
 # MongoDB
-api = API(
-    mongodb=database['mongodb'],
-    smtp=database['smtp']
-)
+#api = API(
+#    mongodb=database['mongodb'],
+#    smtp=database['smtp']
+#)
 
 # Record server start time (UTC)
 server_started = datetime.now()
@@ -77,11 +75,12 @@ server_started = datetime.now()
 def home_page(request: Request):
     return templates.TemplateResponse('index.html', {'request': request})
 
-# methods
-@app.get('/{method}')
-def methods_page(request: Request, method):
+# sendCode
+@app.post('/sendCode')
+def methods_page(request: Request):
     data = request.get_json()
-    return Response(*api.methods[method](**data), {'Content-Type': 'application/json'})
+    #return Response(*api.methods[method](**data), {'Content-Type': 'application/json'})
+    return data
 
 # Server page with working statistics
 @app.get('/status')
