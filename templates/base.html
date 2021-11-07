@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>λямбда</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" href="https://avatars.githubusercontent.com/u/93484853?s=200&v=4">
+    <style type="text/css">
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300&display=swap');
+    * {
+        box-sizing: border-box;
+    }
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        background-color: #101420;
+        font-family: 'JetBrains Mono', monospace;
+    }
+    .banner {
+        width: 100%;
+    }
+    .btn {
+        background-color: #8520af !important;
+        width: 20%;
+        text-decoration: none;
+        color: white;
+        border-color: #710c9b;
+        font-size: 18px;
+        letter-spacing: 0.025em;
+        line-height: 38px;
+        font-weight: 900;
+        height: 40px;
+        padding: 10px 20px;
+    }
+    hr {
+        border: 1px solid #dadada;
+        margin-top: 40px;
+        margin-bottom: 30px;
+    }
+    main div {
+        width: 1000px;
+        margin: 0 auto;
+        padding: 30px;
+        background-color: white;
+    }
+    @media screen and (max-width: 1000px) {
+        main div {
+            width: 800px;
+        }
+    }
+    @media screen and (max-width: 800px) {
+        main div {
+            width: 100%;
+        }
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <img src="https://img.itch.zone/aW1hZ2UyL2phbS8yNjQ2ODAvNzEwNTIxMC5naWY=/original/djg1gu.gif" class="banner">
+        </div>
+    </header>
+    <main>
+        <div>        
+            {% block content %}
+                This is content
+            {% endblock %}
+        </div>
+        <div>© Copyright 2021 Lambda. <a href="https://github.com/lyambda/api/blob/main/LICENSE">LICENSE</a></div>
+</body>
