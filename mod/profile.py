@@ -5,7 +5,7 @@ from mod.api import User
 
 # ************** Standart module *********************
 import random
-from utils import email
+from mod.utils import email
 # ************** Standart module end *****************
 
 # Authorization
