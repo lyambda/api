@@ -53,6 +53,12 @@ directory = config["TEMPLATES"]
 logging = config["LOGGING"]
 # ************** END **********************************
 
+# DB
+from mod.db import global_init
+global_init('database.db')
+
+from mod.messages import Chat
+
 # loguru logger on
 add_logging(logging.getint("level"))
 
@@ -61,12 +67,6 @@ app = FastAPI()
 logger.info("Start server")
 templates = Jinja2Templates(directory["folder"])
 
-# MongoDB
-#api = API(
-#    mongodb=database['mongodb'],
-#    smtp=database['smtp']
-#)
-
 # Record server start time (UTC)
 server_started = datetime.now()
 
@@ -74,13 +74,6 @@ server_started = datetime.now()
 @app.get('/')
 def home_page(request: Request):
     return templates.TemplateResponse('index.html', {'request': request})
-
-# sendCode
-@app.post('/sendCode')
-def methods_page(request: Request):
-    data = request.get_json()
-    #return Response(*api.methods[method](**data), {'Content-Type': 'application/json'})
-    return data
 
 # Server page with working statistics
 @app.get('/status')
@@ -95,6 +88,16 @@ def status_page(request: Request):
     return templates.TemplateResponse('status.html',
                                       {'request': request,
                                        'stats': stats})
+
+# ************** Start method handlers ********************
+# sendCode
+@app.post('/sendCode')
+def methods_page(request: Request):
+    data = request.get_json()
+    # ...
+    return data
+# ...
+# ************** END **********************************
 
 if __name__ == "__main__":
     uvicorn.run('app:app',
