@@ -34,6 +34,9 @@ from fastapi import FastAPI
 from fastapi import Request
 #from fastapi import WebSocket
 from starlette.templating import Jinja2Templates
+from starlette.responses import Response
+from mod import API
+from mod.utils import Utilities
 # ************** External module end *****************
 
 # ************** Logging beginning *******************
@@ -49,7 +52,7 @@ config = configparser.ConfigParser()
 config.read('config.ini')
 database = config["DATABASE"]
 directory = config["TEMPLATES"]
-logging = config['LOGGING']
+logging = config["LOGGING"]
 # ************** END **********************************
 
 # loguru logger on
@@ -60,6 +63,12 @@ app = FastAPI()
 logger.info("Start server")
 templates = Jinja2Templates(directory["folder"])
 
+# MongoDB
+api = API(
+    mongodb=database['mongodb'],
+    smtp=database['smtp']
+)
+
 # Record server start time (UTC)
 server_started = datetime.now()
 
@@ -68,13 +77,19 @@ server_started = datetime.now()
 def home_page(request: Request):
     return templates.TemplateResponse('index.html', {'request': request})
 
+# methods
+@app.get('/{method}')
+def methods_page(request: Request, method):
+    data = request.get_json()
+    return Response(*api.methods[method](**data), {'Content-Type': 'application/json'})
+
 # Server page with working statistics
 @app.get('/status')
 def status_page(request: Request):
     ram = psutil.virtual_memory()
     stats = {
-        'Server time': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-        'Server uptime': str(datetime.now()-server_started),
+        "Server time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "Server uptime": str(datetime.now()-server_started),
         "CPU": f"{psutil.cpu_count()} cores ({psutil.cpu_freq().max}MHz) with {psutil.cpu_percent()} current usage",
         "RAM": f"{ram.used >> 20} mb / {ram.total >> 20} mb"
         }
