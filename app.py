@@ -53,11 +53,14 @@ directory = config["TEMPLATES"]
 logging = config["LOGGING"]
 # ************** END **********************************
 
-# DB
+#  ************ DB connect and import ************
 from mod.db import global_init
 global_init('database.db')
-
+# import classes
 from mod.messages import Chat
+from mod.group import Groups
+from mod.profile import Auth
+# ************** END *****************************
 
 # loguru logger on
 add_logging(logging.getint("level"))

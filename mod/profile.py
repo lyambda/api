@@ -1,7 +1,7 @@
-# ********** DateBase module *****************
+# ********** DataBase module *****************
 from mod.db import create_session
-from mod.models import User
-# ******** End DateBase module ***************
+from mod.api import User
+# ******** End DataBase module ***************
 
 # ************** Standart module *********************
 import random

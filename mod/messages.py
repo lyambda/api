@@ -1,7 +1,7 @@
-# ********** DateBase module *****************
+# ********** DataBase module *****************
 import mod.db
-from mod.models import Group
-# ******** End DateBase module ***************
+from mod.api import Group
+# ******** End DataBase module ***************
 
 class Chat():
     def getMessages():
