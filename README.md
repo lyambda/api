@@ -1,8 +1,4 @@
-# API
-
-[master](https://github.com/MoreliaTalk/morelia_server/tree/master) - стабильная ветка.
-
-[dev](https://github.com/MoreliaTalk/morelia_server/tree/dev) - ветка для добавления нового функционала.
+# IPlogger
 
 ## В разработке применяется ##
 
@@ -10,20 +6,20 @@
 
 * [FastAPI](https://fastapi.tiangolo.com) - основной фреймворк
 
-* [psutil](https://psutil.readthedocs.io/en/latest/g) - python system and process utilities
+* [sqlalchemy](https://www.sqlalchemy.org/) - The Python SQL Toolkit and Object Relational Mapper
 
 ## Описание репозитория ##
 
 * /mod
+  * /maxmind - папка с базами данных IP адресов
+  * /models - папка с модулями моделей и функций БД
   * api.py - модуль отвечает за описание API, а так же валидацию данных.
   * db.py - модуль отвечает за работу БД
-  * group.py - модуль отвечает за работу с группами
-  * messages.py - модуль отвечает за работу с сообщениями
-  * profile.py - модуль отвечает за работу с профилями и аунтефикацией
-  * error.py - модуль отвечает за хранение кодов ошибок.
-  * logging.py - модуль настройки логирования.
+  * geo.py - модуль работы с базами данных IP адресов
+  * utils.py - утилиты
 * /templates - шаблоны для вывода статистики сервера в браузере.
   * base.html - базовый шаблон с основными элементами меню, он имплементируется в каждый рабочий шаблон.
   * index.html - рабочий шаблон главной страницы.
   * status.thml - рабочий шаблон страницы со статусом работы сервера.
-* app.py - основной код сервера
+* create_db.py - файл для создание БД
+* main.py - основной код сервера
